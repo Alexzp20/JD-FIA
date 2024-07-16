@@ -1,0 +1,84 @@
+[{
+    "id":1,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "Asignación de jurado para estudiantes de tesis",
+    "documento": "solicitud1.pdf",
+    "idCategoria": 1,
+    "idSubcategoria": 0
+},
+{
+    "id":2,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "solicitud de prestamo de dinero",
+    "documento": "solicitud2.pdf",
+    "idCategoria": 2,
+    "idSubcategoria": 2
+    
+},
+{
+    "id":3,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "Aprobación de nuevo pensum para ingenieria en sistemas",
+    "documento": "solicitud3.pdf",
+    "idCategoria": 3,
+    "idSubcategoria": 0
+},
+{
+    "id":4,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "Revisión de fechas para nuevo ciclo",
+    "documento": "solicitud4.pdf",
+    "idCategoria": 4,
+    "idSubcategoria": 2
+},
+{
+    "id":5,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "solicitud de aprobación de estudiantes de CUM honorifico",
+    "documento": "solicitud5.pdf",
+    "idCategoria": 5,
+    "idSubcategoria": 0
+}
+,
+{
+    "id":6,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "Remodelación de infraestructura de la facultad",
+    "documento": "solicitud6.pdf",
+    "idCategoria": 1,
+    "idSubcategoria": 0
+}
+,
+{
+    "id":7,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "Compra de pupitres",
+    "documento": "solicitud7.pdf",
+    "idCategoria": 2,
+    "idSubcategoria": 3
+}
+,
+{
+    "id":8,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "Revisión de fechas para parciales ciclo 1/2024",
+    "documento": "solicitud8.pdf",
+    "idCategoria": 3,
+    "idSubcategoria": 0
+},
+{
+    "id":9,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "solicitud de presupuesto ciclo 1/2024",
+    "documento": "solicitud9.pdf",
+    "idCategoria": 4,
+    "idSubcategoria": 1
+},
+{
+    "id":10,
+    "fechaSubida": "2022-10-10",
+    "descripcion": "Aprobación horarios inscripción ciclo 1/2024",
+    "documento": "solicitud10.pdf",
+    "idCategoria": 5,
+    "idSubcategoria": 0
+}]

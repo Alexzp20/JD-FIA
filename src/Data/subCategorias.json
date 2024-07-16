@@ -1,0 +1,33 @@
+[
+    {
+        "idSubCategoria": 1,
+        "idCategoria": 2,
+        "subCategoria": "Administración academica"
+    },
+    {
+        "idSubCategoria": 2,
+        "idCategoria": 2,
+        "subCategoria": "Comite tecnico asesor"
+    },
+    {
+        "idSubCategoria": 3,
+        "idCategoria": 2,
+        "subCategoria": "Direccion general del proceso de graduacion"
+    },
+    {
+        "idSubCategoria": 4,
+        "idCategoria": 2,
+        "subCategoria": "Otros"
+    },
+    {
+        "idSubCategoria": 5,
+        "idCategoria": 4,
+        "subCategoria": "Sin Erogación de fondos"
+    },
+    {
+        "idSubCategoria": 6,
+        "idCategoria": 4,
+        "subCategoria": "Con Erogación de fondos"
+    }
+    
+]

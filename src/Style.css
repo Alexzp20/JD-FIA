@@ -1,0 +1,16 @@
+/* Estilo personalizado para el fondo de la Universidad */
+body{
+  background-image: url('/public/images/Fondo/escuela_de_posgrado_fia_ues_cover.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  position: relative;
+  padding-bottom: 3em;
+  min-height: 100vh;
+}
+footer{
+position: absolute;
+bottom: 0;
+width: 100%;
+}

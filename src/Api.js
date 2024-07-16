@@ -1,0 +1,1 @@
+export const REACT_API_BASE_URL = 'https://backendjrv-production.up.railway.app/api'

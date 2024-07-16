@@ -1,0 +1,22 @@
+[
+    {
+        "idCategoria": 1,
+        "categoria":"Seguimiento de acuerdos"
+    },
+    {
+        "idCategoria": 2,
+        "categoria":"Asuntos de indole academica"
+    },
+    {
+        "idCategoria": 3,
+        "categoria":"Funcionamiento de la facultad"
+    },
+    {
+        "idCategoria": 4,
+        "categoria":"Movimiento de personal"
+    },
+    {
+        "idCategoria": 5,
+        "categoria":"Varios"
+    }
+]

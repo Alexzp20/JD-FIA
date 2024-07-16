@@ -1,0 +1,49 @@
+// Required
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+
+// Create your own map
+$custom-colors: (
+ "custom-primary": #4E5578,
+ "custom-secondary":#FEFF10,
+  "custom-success":#80C96F,
+ "custom-danger": #ED555A,
+ "custom-warning": #ED7755,
+ "custom-info": #0FCFFF,
+ "custom-light": #EAEFEC,
+ "custom-dark": #2F3347,
+ "custom-muted": #88898D
+);
+
+/*$custom-colors: (
+ "custom-primary": #4E5578,
+ "custom-secondary":#FEFF10,
+  "custom-success":#55ED86,
+ "custom-danger": #ED5562,
+ "custom-warning": #ED9A55,
+ "custom-info": #55EDDB,
+ "custom-light": #EAEFEC,
+ "custom-dark": #18282F,
+ "custom-muted": #88898D
+);
+
+$custom-colors: (
+ "custom-primary": #4E5578,
+ "custom-secondary":#FEFF10,
+  "custom-success":#A8EDA4,
+ "custom-danger": #EDA4A4,
+ "custom-warning": #EDB4A4,
+ "custom-info": #A4C7ED,
+ "custom-light": #EAEFEC,
+ "custom-dark": #262B37,
+ "custom-muted": #88898D
+);
+*/
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+
+@import "../../node_modules/bootstrap/scss/bootstrap";

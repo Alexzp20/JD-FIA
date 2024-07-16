@@ -1,0 +1,55 @@
+[
+    {
+    "direccion": "/buzon",
+    "titulo": "Solicitudes",
+    "imagen": "/images/MenuInicio/Solicitudes.png"
+}
+,
+    {
+    "direccion": "/informe",
+    "titulo": "Informes",
+    "imagen": "/images/MenuInicio/Informe.png"
+}
+,
+    {
+    "direccion": "/acta",
+    "titulo": "Actas",
+    "imagen": "/images/MenuInicio/Acta.png"
+}
+,
+{
+    "direccion": "/buscador",
+    "titulo": "Buscador",
+    "imagen": "/images/MenuInicio/Buscador.png"
+}
+,
+{
+    "direccion": "/estadistico",
+    "titulo": "Estadisticos",
+    "imagen": "/images/MenuInicio/Estadisticos.png"
+}
+,
+{
+    "direccion": "/ajustes",
+    "titulo": "Ajustes",
+    "imagen": "/images/MenuInicio/Ajustes.png"
+}
+,
+{
+    "direccion": "/buzon/revision",
+    "titulo": "Revision",
+    "imagen": "/images/Buzon/Revision.png"
+}
+,
+{
+    "direccion": "/agenda/nueva",
+    "titulo": "Nueva Agenda",
+    "imagen": "/images/MenuInicio/Nuevo.png"
+}
+,
+{
+    "direccion": "/agenda",
+    "titulo": "Menu Agendas",
+    "imagen": "/images/MenuInicio/Nuevo.png"
+}
+]
