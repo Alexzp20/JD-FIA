@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/JD-FIA/static/css/main.fd9c8a98.css",
-    "main.js": "/JD-FIA/static/js/main.e0c91707.js",
+    "main.js": "/JD-FIA/static/js/main.674b6437.js",
     "static/media/escuela_de_posgrado_fia_ues_cover.jpg": "/JD-FIA/static/media/escuela_de_posgrado_fia_ues_cover.225601a314784ff29d61.jpg",
     "index.html": "/JD-FIA/index.html",
     "main.fd9c8a98.css.map": "/JD-FIA/static/css/main.fd9c8a98.css.map",
-    "main.e0c91707.js.map": "/JD-FIA/static/js/main.e0c91707.js.map"
+    "main.674b6437.js.map": "/JD-FIA/static/js/main.674b6437.js.map"
   },
   "entrypoints": [
     "static/css/main.fd9c8a98.css",
-    "static/js/main.e0c91707.js"
+    "static/js/main.674b6437.js"
   ]
 }
