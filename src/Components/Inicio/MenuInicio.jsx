@@ -51,7 +51,7 @@ const MenuInicio = () => {
                                                 <CardImg
                                                     style={{filter: 'invert(100%)', width:"5rem", aspectRatio: 20/22    }}
                                                     alt="Card image cap"
-                                                    src={opcion.ruta_imagen}
+                                                    src={process.env.PUBLIC_URL+opcion.ruta_imagen}
                                                     />
                                                 </CardBody>
                                         </Card> 

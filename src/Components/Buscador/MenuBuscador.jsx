@@ -35,7 +35,7 @@ const MenuBuscador = () => {
                                     <CardImg 
                                         style={{filter: 'invert(100%)'}}
                                         alt="Card image cap"
-                                        src= "/images/Buscador/Agenda.png"
+                                        src= {process.env.PUBLIC_URL+"/images/Buscador/Agenda.png"}
                                         />
                                     </CardBody>
                             </Card> 
@@ -58,7 +58,7 @@ const MenuBuscador = () => {
                                    <CardImg 
                                         style={{filter: 'invert(100%)'}}
                                         alt="Card image cap"
-                                        src= '/images/Buscador/Acuerdo2.png'
+                                        src= {process.env.PUBLIC_URL+"/images/Buscador/Acuerdo2.png"}
                                         />
                                     </CardBody>
                             </Card> 
@@ -80,7 +80,7 @@ const MenuBuscador = () => {
                                     <CardImg 
                                         style={{filter: 'invert(100%)'}}
                                         alt="Card image cap"
-                                        src= '/images/Buscador/Solicitud.png'
+                                        src= {process.env.PUBLIC_URL+"/images/Buscador/Solicitud.png"}
                                         />
                                     </CardBody>
                             </Card> 

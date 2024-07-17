@@ -34,7 +34,7 @@ export const MenuInformes = () => {
                                 <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= "/images/Informe/nuevo.png"
+                                    src= {process.env.PUBLIC_URL+"/images/Informe/Nuevo.png"}
                                     />
                                 </CardBody>
                         </Card> 
@@ -57,7 +57,7 @@ export const MenuInformes = () => {
                                <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= '/images/Informe/gestion.png'
+                                    src= {process.env.PUBLIC_URL+"/images/Informe/gestion.png"}
                                     />
                                 </CardBody>
                         </Card> 

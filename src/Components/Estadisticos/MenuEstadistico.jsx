@@ -35,7 +35,7 @@ const MenuEstadistico = () => {
                                     <CardImg 
                                         style={{filter: 'invert(100%)'}}
                                         alt="Card image cap"
-                                        src= "/images/estadistico/calendario.png"
+                                        src= {process.env.PUBLIC_URL+"/images/Estadistico/calendario.png"}
                                         />
                                     </CardBody>
                             </Card> 
@@ -58,7 +58,7 @@ const MenuEstadistico = () => {
                                    <CardImg 
                                         style={{filter: 'invert(100%)'}}
                                         alt="Card image cap"
-                                        src= '/images/estadistico/area.png'
+                                        src= {process.env.PUBLIC_URL+"/images/estadistico/area.png"}
                                         />
                                     </CardBody>
                             </Card> 

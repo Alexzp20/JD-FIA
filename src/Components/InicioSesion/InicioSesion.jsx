@@ -13,8 +13,6 @@ const InicioSesion = () => {
     const cookies = new Cookies(null, { path: '/' });
 
 
-
-
     const onSubmit = async (data) =>{
 
         let user = {
@@ -63,13 +61,7 @@ const InicioSesion = () => {
             });
           }
     
-
-
-
-
         }
-
-
 
 
     return (
@@ -89,7 +81,7 @@ const InicioSesion = () => {
                         <Row>
                             <Col xs="1"></Col>
                             <Col xs="3" >
-                            <img src="/images/inicioSesion/sesion.png" className= "img-fluid" alt="" />
+                            <img src= "/public/images/inicioSesion/sesion.png" className= "img-fluid" alt="" />
                             </Col>
                             <Col xs="1"></Col>
                             <Col xs="6" >

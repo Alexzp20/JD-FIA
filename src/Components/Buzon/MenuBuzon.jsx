@@ -34,7 +34,7 @@ const MenuBuzon = () => {
                                 <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= "/images/Buzon/SubidaDoc.png"
+                                    src= {process.env.PUBLIC_URL+"/images/Buzon/SubidaDoc.png"}
                                     />
                                 </CardBody>
                         </Card> 
@@ -56,7 +56,7 @@ const MenuBuzon = () => {
                                 <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= "/images/Buzon/Revision.png"
+                                    src= {process.env.PUBLIC_URL+"/images/Buzon/Revision.png"}
                                     />
                                 </CardBody>
                         </Card> 
@@ -78,7 +78,7 @@ const MenuBuzon = () => {
                                 <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= '/images/Buzon/HistorialDocs.png'
+                                    src= {process.env.PUBLIC_URL+"/images/Buzon/HistorialDocs.png"}
                                     />
                                 </CardBody>
                         </Card> 

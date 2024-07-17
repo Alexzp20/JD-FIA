@@ -34,7 +34,7 @@ export const MenuAgenda = () => {
                                 <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= "/images/MenuInicio/Nuevo.png"
+                                    src={process.env.PUBLIC_URL+"/images/MenuInicio/Nuevo.png"} 
                                     />
                                 </CardBody>
                         </Card> 
@@ -56,7 +56,7 @@ export const MenuAgenda = () => {
                                 <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= "/images/Buzon/Revision.png"
+                                    src= {process.env.PUBLIC_URL+"/images/Buzon/Revision.png"}
                                     />
                                 </CardBody>
                         </Card> 
@@ -78,7 +78,7 @@ export const MenuAgenda = () => {
                                 <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= '/images/Buzon/HistorialDocs.png'
+                                    src= {process.env.PUBLIC_URL+"/images/Buzon/HistorialDocs.png"}
                                     />
                                 </CardBody>
                         </Card> 
