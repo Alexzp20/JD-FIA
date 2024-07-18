@@ -81,7 +81,7 @@ const InicioSesion = () => {
                         <Row>
                             <Col xs="1"></Col>
                             <Col xs="3" >
-                            <img src= "/public/images/inicioSesion/sesion.png" className= "img-fluid" alt="" />
+                            <img src= {process.env.PUBLIC_URL+"/images/InicioSesion/sesion.png"} className= "img-fluid" alt="" />
                             </Col>
                             <Col xs="1"></Col>
                             <Col xs="6" >

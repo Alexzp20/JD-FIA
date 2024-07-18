@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Button, Col, Container, Form, FormGroup, Input, Label, Row, FormFeedback } from 'reactstrap';
 import Asistencia from './1Asistencia/Asistencia';
 import {useForm, Controller} from 'react-hook-form'; 
 import AprobacionAgenda from './2Aprobacion/AprobacionAgenda';
@@ -14,7 +14,7 @@ import { REACT_API_BASE_URL } from '../../Api';
 
 const NuevaAgenda = () => {
 
-    const { handleSubmit: handleAgenda ,control} = useForm();
+    const { handleSubmit: handleAgenda, control, formState: { errors } } = useForm();
     const [solicitudes , setSolicitudes] = useState ({});
     const [asistencias , setAsistencias] = useState ([]);
     const [actas , setActas] = useState ([]);
@@ -96,17 +96,19 @@ const NuevaAgenda = () => {
                                                 name="numAgenda"
                                                 control={control}
                                                 defaultValue=""
+                                                rules={{ required: "El código de la agenda es obligatorio" }}
                                                 render={({ field }) => 
-                                                    <Input
-                                                    {...field}
-                                                    id="numAgenda"
-                                                    placeholder="Ingrese el numero de agenda"
-                                                    type="text"
-                                                    />
+                                                    <>
+                                                    <Input {...field} id="numAgenda" placeholder="Ingrese el numero de agenda" type="text" invalid={!!errors.numAgenda} />
+                                                    {errors.numAgenda && (
+                                                    <FormFeedback>{errors.numAgenda.message}</FormFeedback>
+                                                    )}
+                                                    </>
                                                  }/>  
+
                                         </FormGroup>
-                                        <hr />
-                                       
+
+                                        <hr />                                      
                                     </Col>
                                     <Col xs="4"></Col>
                                 </Row>
@@ -119,13 +121,20 @@ const NuevaAgenda = () => {
                                                 name="convoca"
                                                 control={control}
                                                 defaultValue=""
+                                                rules={{ required: "Debe poner nombre de quien lo realiza" }}
                                                 render={({ field }) => 
+                                                    <>
                                                     <Input
                                                     {...field}
                                                     id="convoca"
                                                     placeholder="Ingrese un nombre"
                                                     type="text"
+                                                    invalid={!!errors.convoca}
                                                     />
+                                                    {errors.convoca && (
+                                                    <FormFeedback>{errors.convoca.message}</FormFeedback>
+                                                    )}
+                                                    </>
                                             }/>  
                                         </FormGroup>
                                         <hr />
@@ -135,13 +144,20 @@ const NuevaAgenda = () => {
                                                 name="lugar"
                                                 control={control}
                                                 defaultValue=""
+                                                rules={{ required: "Debe poner lugar donde se realizara" }}
                                                 render={({ field }) => 
+                                                    <>
                                                     <Input
                                                     {...field}
-                                                    id="lugar"
-                                                    placeholder="Ingrese un lugar"
+                                                    id="colugarnvoca"
+                                                    placeholder="Ingrese un nombre"
                                                     type="text"
+                                                    invalid={!!errors.lugar}
                                                     />
+                                                    {errors.lugar && (
+                                                    <FormFeedback>{errors.lugar.message}</FormFeedback>
+                                                    )}
+                                                    </>                                                  
                                             }/>  
                                         </FormGroup>
                                         <hr />
@@ -151,12 +167,19 @@ const NuevaAgenda = () => {
                                                 name="primeraConvocatoria"
                                                 control={control}
                                                 defaultValue=""
-                                                render={({ field }) => 
+                                                rules={{ required: "Debe poner hora" }}
+                                                render={({ field }) =>
+                                                    <>
                                                     <Input
                                                     {...field}
                                                     id="primeraConvocatoria"
                                                     type="time"
+                                                    invalid={!!errors.primeraConvocatoria}
                                                     />
+                                                    {errors.primeraConvocatoria && (
+                                                    <FormFeedback>{errors.primeraConvocatoria.message}</FormFeedback>
+                                                    )}
+                                                    </> 
                                             }/>  
                                         </FormGroup>
                                         <hr />
@@ -168,12 +191,19 @@ const NuevaAgenda = () => {
                                                 name="fechaAgenda"
                                                 control={control}
                                                 defaultValue=""
+                                                rules={{ required: "Debe poner un dia" }}
                                                 render={({ field }) => 
+                                                    <>
                                                     <Input
                                                     {...field}
                                                     id="fechaAgenda"
                                                     type="date"
+                                                    invalid={!!errors.fechaAgenda}
                                                     />
+                                                    {errors.fechaAgenda && (
+                                                    <FormFeedback>{errors.fechaAgenda.message}</FormFeedback>
+                                                    )}
+                                                    </>
                                             }/>  
                                         </FormGroup>
                                         <hr />
@@ -206,12 +236,19 @@ const NuevaAgenda = () => {
                                                 name="segundaConvocatoria"
                                                 control={control}
                                                 defaultValue=""
-                                                render={({ field }) => 
+                                                rules={{ required: "Debe poner hora" }}
+                                                render={({ field }) =>
+                                                <>
                                                 <Input
                                                 {...field}
                                                 id="segundaConvocatoria"
                                                 type="time"
+                                                invalid={!!errors.segundaConvocatoria}
                                                 />
+                                                {errors.segundaConvocatoria && (
+                                                <FormFeedback>{errors.segundaConvocatoria.message}</FormFeedback>
+                                                )}
+                                                </> 
                                             }/>  
                                         </FormGroup>
                                         <hr />
@@ -222,7 +259,7 @@ const NuevaAgenda = () => {
                                 <Row>
                                     <Col xs="12">
                                         <Asistencia setAsistencia={setAsistencias}/>
-                                        <AprobacionAgenda Controller={Controller} control={control}/>
+                                        <AprobacionAgenda Controller={Controller} errors={errors} control={control}/>
                                         <MenuActas setTotalActas={setActas} setVotaciones={setVotacionesActas}/>
                                         <TablaSolicitudes setSolicitudes={setSolicitudes} solicitudes={solicitudes} votaciones={votaciones} setVotaciones={setVotaciones}/>
                                         <MenuInformes setTotalInformes={setInformes}/>

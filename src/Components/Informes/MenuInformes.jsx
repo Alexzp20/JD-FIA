@@ -34,7 +34,7 @@ export const MenuInformes = () => {
                                 <CardImg 
                                     style={{filter: 'invert(100%)'}}
                                     alt="Card image cap"
-                                    src= {process.env.PUBLIC_URL+"/images/Informe/Nuevo.png"}
+                                    src= {process.env.PUBLIC_URL+"/images/Informe/nuevo.png"}
                                     />
                                 </CardBody>
                         </Card> 
