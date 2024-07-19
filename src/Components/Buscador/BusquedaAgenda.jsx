@@ -3,6 +3,10 @@ import {  Col, Container, Input, Label, Row, Table } from 'reactstrap';
 import { pedirAgendas } from '../../Helpers/pedirDatos';
 import FilaAgenda from './Filas/FilaAgenda';
 import NavBar from '../Navbar/NavBar';
+import { REACT_API_BASE_URL } from '../../Api';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+const token = cookies.get('token')
 
 const BusquedaAgenda = () => {
 
@@ -20,7 +24,7 @@ const BusquedaAgenda = () => {
      const filtrarBusqueda = (terminoBusqueda) => {
         var resultadosBusqueda = agendasBusqueda.filter((elemento) => {
 
-            if (elemento.descripcion.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+            if (elemento.numero.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
                 return elemento
             }
         })
@@ -29,11 +33,20 @@ const BusquedaAgenda = () => {
 
     //hook para devolver los datos de las agendas
     useEffect(() => {
-        pedirAgendas()
-        .then((res)=>{
-            setAgendas(res);
-            setAgendasBusqueda(res);
+        fetch(`${REACT_API_BASE_URL}/indexPublicadas`, {
+            headers: {
+               'Authorization': `Bearer ${token}`
+      },
         })
+        .then(response => response.json())
+        .then(data =>{ 
+            setAgendas(data);
+            setAgendasBusqueda(data);
+          console.log(data)
+            
+            console.log(data)})
+        .catch(error => console.log(error));
+        
     }, []);
 
 
@@ -52,7 +65,7 @@ const BusquedaAgenda = () => {
                     <br />
                     <Row>
                         <Label className="text-center text-light" for="inputBusqueda" sm="3">
-                            Busqueda por descripción
+                            Busqueda por Codigo
                         </Label>
                         <Col sm="7">
                             <Input
@@ -71,13 +84,14 @@ const BusquedaAgenda = () => {
                         <Col xs='12'>
                             <Table bordered striped className='text-center'>
                                 <thead className='table-primary'>
-                                    <tr>    
-                                        <th>#</th>
-                                        <th>Fecha de creación</th>
-                                        <th>Descripción de la agenda</th>
-                                        <th>Hora de inicio</th>
-                                        <th>Acciones</th>
-                                    </tr>
+                                <tr>    
+                                    <th>#</th>
+                                    <th>Fecha y hora </th>
+                                    <th>Codigo de la agenda</th>
+                                    <th>Convoca</th>
+                                    <th>Lugar</th>
+                                    <th>Acciones para la agenda</th>
+                                </tr>
                                 </thead>
                                 <tbody className='table-light'>
                                 {agendas.map((agenda)=><FilaAgenda key={agenda.id_evento} agenda={agenda}/>)}

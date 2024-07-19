@@ -53,7 +53,7 @@ function App() {
           <Route path='/agenda' element={<MenuAgenda/>}/>
           <Route path='/agenda/revision' element={<RevisionAgendas/>}/>
           <Route path='/agenda/nueva' element={<NuevaAgenda/>}/>
-          <Route path='/agenda/mostrar/:id' element={<MostrarAgenda/>}/>
+          <Route path='/agenda/mostrar/:id/:ruta' element={<MostrarAgenda/>}/>
           <Route path='/acta' element={<MenuActas/>}/>
           <Route path='/acta/nueva' element={<NuevaActa/>}/>
           <Route path='/acta/gestion' element={<GestionActas/>}/>

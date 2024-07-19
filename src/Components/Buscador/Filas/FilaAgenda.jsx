@@ -1,18 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 const FilaAgenda = ({agenda}) => {
     return (
-        <tr>
-            <th scope='row'>{agenda.id_evento}</th>
-            <th>{agenda.fecha}</th>
-            <td>{agenda.descripcion}</td>
-            <td>{agenda.hora_inicio}</td>
+        <tr key={agenda.id}>
+            <th>{agenda.id}</th>
+            <td>{agenda.fecha +" "+ agenda.hora_inicio}</td>
+            <td>{agenda.numero}</td>
+            <td>{agenda.convoca}</td>
+            <td>{agenda.lugar}</td>
             <td>
-                <Button className='m-1 text-white' color='custom-warning'>Editar</Button>
-                <Button className="text-white" color='custom-danger'>Eliminar</Button>
+                <Link to={`/agenda/mostrar/${agenda.id}/${1}`}> <Button color='custom-success'className='text-light'>Ver agenda</Button></Link>
             </td>
-        </tr>   
+        </tr>
     );
 }
 

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { VerPdf } from '../../Pdf/VerPdf';
+import Cookies from 'universal-cookie';
 
 const TablaSolicitud = ({titulo ="", solicitudes}) => {
+    const cookies = new Cookies();
+    const user = cookies.get('user')
     return (
         <React.Fragment>
             {titulo !== "" && (
@@ -18,7 +21,8 @@ const TablaSolicitud = ({titulo ="", solicitudes}) => {
                                 <th scope='row'>{solicitud.id}</th>
                                 <td >{solicitud.codigo}</td>
                                 <td >{solicitud.descripcion}</td>
-                                <td ><VerPdf id={solicitud.id} tipo="solicitud"/></td>
+                                <td >{user.roles[0].id === 1 || user.roles[0].id === 2 ?
+                                        <VerPdf id={solicitud.id} tipo="solicitud"/>:'No documento'}</td>
                                 <td >{solicitud.categoria}</td>
                                 <td >{solicitud.subcategoria ? solicitud.subcategoria : '-'}</td>
                             </tr>

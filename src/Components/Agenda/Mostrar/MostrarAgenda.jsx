@@ -10,7 +10,7 @@ import Cookies from 'universal-cookie'
 import { REACT_API_BASE_URL } from '../../../Api.js';
 
 export const MostrarAgenda = () => {
-    const {id} = useParams()
+    const {id, ruta} = useParams()
     const navigate = useNavigate()
     const [actas, setActas] = useState([]);
     const [asistencias, setAsistencias] = useState([]);
@@ -123,7 +123,7 @@ export const MostrarAgenda = () => {
                                 <br />
                                     <Row>
                                         <Col xs="4"></Col>
-                                        <Col xs="4"><Button className='text-light' color='custom-danger' onClick={()=>navigate('/agenda/revision')} block> Cerrar</Button></Col>
+                                        <Col xs="4"><Button className='text-light' color='custom-danger' onClick={()=>{navigate(ruta === '1' ? '/buscador/agenda':'/agenda/revision')}} block> Cerrar</Button></Col>
                                         <Col xs="4"></Col>
                                     </Row>
                                 <br />
@@ -132,3 +132,5 @@ export const MostrarAgenda = () => {
         </React.Fragment>
   )
 }
+
+// /agenda/revision'

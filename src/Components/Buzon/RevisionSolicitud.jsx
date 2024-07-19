@@ -144,6 +144,7 @@ export default function RevisionSolicitud() {
                             <th>Categoria </th>
                             <th>SubCategoria </th>
                             <th>Descripción </th>
+                            <th>Remitente</th>
                             <th>Archivo</th>
                             <th>Acciones</th>
                         </tr>
@@ -157,6 +158,7 @@ export default function RevisionSolicitud() {
                         <td>{solicitud.categoria.name}</td>
                         <td>{solicitud.subcategoria !== null ? solicitud.subcategoria.name : '-'}</td>
                         <td>{solicitud.descripcion}</td>
+                        <td>{solicitud.user.apellido !== null ? solicitud.user.name +' '+ solicitud.user.apellido : solicitud.user.name}</td>
                         <td><VerPdf id={solicitud.id} tipo="solicitud"/></td>
                         <td><Button color='custom-warning' className='text-light' onClick={()=>{toggleEditar(solicitud)}}>Editar</Button> { } <Button color='custom-success'className='text-light' onClick={()=>{handleSolicitud(solicitud, 2,"")}}>Aprobar</Button> { } <Button color='custom-danger'className='text-light' onClick={()=>{toggleDenegar(solicitud)}}>Denegar</Button> { }
                         </td>

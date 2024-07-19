@@ -104,6 +104,16 @@ const setNuevaAsistencia = (setAsistentes, nuevaAsistencia) =>{
         return nuevoArreglo;
     })
 
+    setTipoAsistente('0')
+    setUsuarioAsistente(0)
+    setInvitadoAsistente('')
+    setHoraAsistencia('')
+    setAsistencia(false)
+    setQuorum(false)
+
+
+
+
 }
 
 
