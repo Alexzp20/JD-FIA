@@ -2,8 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardImg, CardText, Col, Container, Row} from 'reactstrap';
 import NavBar from '../Navbar/NavBar';
+import Cookies from 'universal-cookie';
 
 const MenuBuzon = () => {
+    
+    const cookies = new Cookies();
+    const user = cookies.get('user')
+
     return (
         <React.Fragment>
             <NavBar/>
@@ -17,7 +22,7 @@ const MenuBuzon = () => {
             <br />
             <Container>
                     <Row>
-                    <Col xs="2"></Col>
+                    <Col xs={user.roles[0].id === 1 || user.roles[0].id === 2 ? '2':'3'}></Col>
                     <Col xs = "2">
                     <Link style={{ textDecoration: 'none', color: 'white' }} to="/buzon/nuevaSolicitud" >
                         <Card
@@ -40,7 +45,8 @@ const MenuBuzon = () => {
                         </Card> 
                     </Link>
                     </Col>
-                    <Col xs="1"></Col>
+                    <Col xs='1'></Col>
+                    {user.roles[0].id === 1 || user.roles[0].id === 2 ? ( 
                     <Col xs = "2">
                     <Link style={{ textDecoration: 'none', color: 'white' }} to="/buzon/revision" >
                         <Card
@@ -61,8 +67,9 @@ const MenuBuzon = () => {
                                 </CardBody>
                         </Card> 
                     </Link>
-                    </Col>
-                    <Col xs="1"></Col>
+                    </Col> 
+                    ):''}
+                    <Col xs='1'></Col>
                     <Col xs="2">
                     <Link style={{ textDecoration: 'none', color: 'white' }} to="/buzon/historial" >
                         <Card
@@ -84,7 +91,7 @@ const MenuBuzon = () => {
                         </Card> 
                     </Link>
                     </Col>
-                    <Col xs="2"></Col>
+                    <Col xs={user.roles[0].id !== 1 || user.roles[0].id === 2 ? '2':'3'}></Col>
                     </Row> 
                 </Container>
                 <br />

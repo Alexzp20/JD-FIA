@@ -27,7 +27,7 @@ export const GestionInformes = () => {
       } 
         })
         .then(response => response.json())
-        .then(data =>{ setInformes(data)})
+        .then(data =>{ setInformes(data); console.log(data)})
         .catch(error => console.log(error));
     }
 
@@ -98,6 +98,7 @@ export const GestionInformes = () => {
                                         <th>#</th>
                                         <th>Fecha y hora de subida</th>
                                         <th>Codigo del informe</th>
+                                        <th>Remitente</th>
                                         <th>Archivo</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -108,6 +109,7 @@ export const GestionInformes = () => {
                                     <th>{informe.id}</th>
                                     <td>{informe.created_at.split("T")[0]+" "+ informe.created_at.split("T")[1].split(".")[0]}</td>
                                     <td>{informe.codigo}</td>
+                                    <td>{informe.remitente_name}</td>
                                     <td><VerPdf id={informe.id} tipo="informe"/></td>
                                     <td><Button color='custom-warning' className='text-light' onClick={()=>{toggleEditar(informe)}}>Editar</Button> { } <Button color='custom-success'className='text-light' onClick={()=>{eliminarInforme(informe.id)}}>Eliminar</Button> 
                                     </td>
@@ -116,7 +118,7 @@ export const GestionInformes = () => {
                             </Table>
                         </Col>      
                     </Row>
-                    <ModalEditInforme  toggleEdit={toggleEdit} modalEdit={modalEdit} informe={informeEdit}/>
+                    <ModalEditInforme  toggleEdit={toggleEdit} modalEdit={modalEdit} informe={informeEdit} getInformes={getInformes}/>
     </Container>
     </React.Fragment>
   )
