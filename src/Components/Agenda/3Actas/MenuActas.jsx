@@ -5,13 +5,14 @@ import Swal from 'sweetalert2';
 import { ModalEditarEstadoActa } from './ModalEditarEstadoActa';
 import { VerPdf } from '../../Pdf/VerPdf';
 
-const MenuActas = ({setTotalActas, setVotaciones}) => {
+const MenuActas = ({setTotalActas, setVotaciones, actasEditar, votacionesActasEditar}) => {
 
     const [modalNew, setModalNew] = useState(false);
     const [modalEditarEstado, setModalEditarEstado] = useState(false);
     const [actas, setActas] = useState([]);
     const [actaEditar, setActaEditar] = useState({});
     const [votacion, setVotacion ] = useState([]);
+    const [votoEditar, setVotoEditar ] = useState(null);
 
     const toggleNew = () =>{
         setModalNew(!modalNew)
@@ -21,11 +22,26 @@ const MenuActas = ({setTotalActas, setVotaciones}) => {
     }
 
     const handleEditarEstado  = (acta)=>{
+        
+        buscarVoto(acta.id) 
         setActaEditar(acta)
         toggleEditarEstado()
     }
 
+    const buscarVoto = (id) => {
+        const votoEncontrado = votacion.find(voto => voto.acta_id === id);
+        setVotoEditar(votoEncontrado || null)
+      }
+
     
+    useEffect(() => {
+       if(actasEditar) setActas(actasEditar) 
+    }, [actasEditar]);
+
+    useEffect(() => {
+        if(votacionesActasEditar) setVotacion(votacionesActasEditar)
+    }, [votacionesActasEditar]);
+
     useEffect(() => {
         setTotalActas(actas)
     }, [actas, setTotalActas]);
@@ -127,7 +143,7 @@ const MenuActas = ({setTotalActas, setVotaciones}) => {
                         </Table>
                     </Col>
                 </Row>
-                <ModalEditarEstadoActa modalEstado={modalEditarEstado} toggleEstado={toggleEditarEstado} acta={actaEditar} handleVotacion={handleVotacion}/>
+                <ModalEditarEstadoActa votoEditar={votoEditar} modalEstado={modalEditarEstado} toggleEstado={toggleEditarEstado} acta={actaEditar} handleVotacion={handleVotacion}/>
        </Container>
     );
 }

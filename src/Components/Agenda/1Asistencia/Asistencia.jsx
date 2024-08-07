@@ -5,7 +5,7 @@ import ModalNuevaAsistencia from './ModalNuevaAsistencia';
 import Cookies from 'universal-cookie';
 import { REACT_API_BASE_URL } from '../../../Api.js';
 
-const Asistencia = ({setAsistencia}) => {
+const Asistencia = ({setAsistencia, asistenciasEditar}) => {
 
     const [asistentesPropietarios,setAsistentesPropietarios]= useState([]);
     const [asistentesSuplentes,setAsistentesSuplentes]= useState([]);
@@ -16,6 +16,51 @@ const Asistencia = ({setAsistencia}) => {
     const cookies = new Cookies();
     const token = cookies.get('token')
 
+    useEffect(() => {
+    
+           if(asistenciasEditar){
+            let propietarios = []
+            let suplentes = []
+            let otros =  []
+        
+            asistenciasEditar && asistenciasEditar.map((asistente) =>{
+
+                let  nuevaAsistencia = {}
+
+                if(asistente.tipo_asistente !== 0 && asistente.tipo_asistente !== 1){
+                    nuevaAsistencia = {
+                        "tipoAsistente": `${asistente.tipo_asistente}`,
+                        "invitado": asistente.invitado,
+                        "horaAsistencia": asistente.hora,
+                        "asistencia": asistente.asistencia === 1 ? true : false,
+                        "quorum": asistente.quarum === 1 ? true : false    
+                    }
+                }
+                else{
+                    nuevaAsistencia = {
+                        "tipoAsistente": `${asistente.tipo_asistente}`,
+                        "usuarioAsistente": parseInt(asistente.user_id),
+                        "horaAsistencia": asistente.hora,
+                        "asistencia": asistente.asistencia === 1 ? true : false,
+                        "quorum": asistente.quarum === 1 ? true : false,   
+                    }
+                }
+
+
+
+                asistente.tipo_asistente === 0?
+                    propietarios.push(nuevaAsistencia): 
+                    asistente.tipo_asistente === 1?
+                        suplentes.push(nuevaAsistencia):
+                        otros.push(nuevaAsistencia)
+            })
+    
+            setAsistentesSuplentes(suplentes)
+            setAsistentesPropietarios(propietarios)
+            setAsistentesOtros(otros)   
+           }
+    
+    }, [asistenciasEditar]);
 
     useEffect(() => {
         fetch(`${REACT_API_BASE_URL}/users/asistencia`, {
@@ -33,9 +78,9 @@ const Asistencia = ({setAsistencia}) => {
 
 
     useEffect(() => {
-        
-        const asistentes = [...asistentesPropietarios, ...asistentesSuplentes, ...asistentesOtros]
-        setAsistencia(asistentes)
+
+            const asistentes = [...asistentesPropietarios, ...asistentesSuplentes, ...asistentesOtros]
+            setAsistencia(asistentes)
 
 
     }, [asistentesPropietarios, asistentesOtros, asistentesSuplentes, setAsistencia]);

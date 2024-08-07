@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Input, Row, Modal, ModalHeader, ModalBody, Label   } from 'reactstrap';
 
-export const ModalEditarEstadoActa = ({modalEstado, toggleEstado, acta, handleVotacion}) => {
+export const ModalEditarEstadoActa = ({modalEstado, toggleEstado, acta, handleVotacion, votoEditar}) => {
 
   const [votosFavor, setVotosFavor] = useState(0)
   const [votosContra, setVotosContra] = useState(0)
@@ -10,6 +10,23 @@ export const ModalEditarEstadoActa = ({modalEstado, toggleEstado, acta, handleVo
   const [comentario, setComentario] = useState("")
   const [desactivado, setDesactivado] = useState(true);
 
+  useEffect(() => {
+    
+    console.log(votoEditar)
+    if(votoEditar !== null){
+      setEstado(votoEditar.estado)
+      setVotosFavor(votoEditar.afavor)
+      setVotosContra(votoEditar.contra)
+      setVotosAbstencion(votoEditar.abstencion)
+      setComentario(votoEditar.comentario)
+    }else{
+      setEstado("6")
+      setVotosFavor(0)
+      setVotosContra(0)
+      setVotosAbstencion(0)
+      setComentario("")
+    }
+  }, [votoEditar]);
 
   useEffect(() => {
    

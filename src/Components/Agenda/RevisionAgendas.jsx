@@ -111,7 +111,9 @@ export const RevisionAgendas = () => {
                         <td>{agenda.convoca}</td>
                         <td>{agenda.lugar}</td>
                         <td>
-                           <Link to={`/agenda/mostrar/${agenda.id}/${2}`}> <Button color='custom-success'className='text-light'>Ver agenda</Button></Link>
+                          <Link to={`/agenda/mostrar/${agenda.id}/${2}`}> <Button color='custom-success'className='text-light my-2'>Ver agenda</Button></Link>
+                            {' '}
+                          <Link to={`/agenda/nueva/${agenda.id}`}> <Button color='custom-warning'className='text-light'>Editar agenda</Button></Link>
                             {' '}
                             {agenda.publicada === 1 ? <Button color='custom-danger' className='text-light' onClick={()=>{}}>Ocultar</Button>:
                             <Button color='custom-info' className='text-light' onClick={()=>{publicarAgenda(agenda.id)}}>Publicar</Button> }

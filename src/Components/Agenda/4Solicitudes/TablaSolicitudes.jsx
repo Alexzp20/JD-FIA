@@ -3,11 +3,13 @@ import { Button, Col, Container, Row, Table } from 'reactstrap';
 import ModalSolicitudes from './ModalSolicitudes';
 import ModalEditarEstadoSolicitud from './ModalEditarEstadoSolicitud';
 import TablaSolicitud from './TablaSolicitud';
+import { set } from 'react-hook-form';
 
-const TablaSolicitudes = ({solicitudes, setSolicitudes, votaciones, setVotaciones}) => {
+const TablaSolicitudes = ({solicitudesEditar, setSolicitudes, votaciones, setVotaciones, votacionesEditar}) => {
 
        //Hooks de arreglos para las solicitudes
        const [solicitudEditarEstado, setSolicitudEditarEstado ] = useState("");
+       const [votoEditar, setVotoEditar ] = useState(null);
        const [votacion, setVotacion ] = useState([]);
        const [solicitudesSeguimiento, setSolicitudesSeguimiento ] = useState([]);
        const [solicitudesAdminAcademicas, setSolicitudesAdminAcademicas ] = useState([]);
@@ -18,11 +20,18 @@ const TablaSolicitudes = ({solicitudes, setSolicitudes, votaciones, setVotacione
        const [solicitudesConErogacion, setSolicitudesConErogacion] = useState([]);
        const [solicitudesSinErogacion, setSolicitudesSinErogacion] = useState([]);
        const [solicitudesVarios, setSolicitudesVarios ] = useState([]);
-       
+       const [solicitudesEdit,setSolicitudEdit] = useState([]);
+
+       useEffect(() => {
+        setSolicitudEdit(solicitudesEditar)
+         solicitudesEdit.map(solicitud => handleSeleccion(solicitud))
+       }, [solicitudesEditar,solicitudesEdit]);
+
+       useEffect(() => {
+        if(votacionesEditar) setVotacion(votacionesEditar)
+       }, [votacionesEditar]);
 
         //Hacer un array de votaciones, luego en el metodo de añadir, crear el objeto votación y añadirlo al array para que se puedan hacer las votaciones
-
-
         useEffect(() => {
 
         var solicitudes = {
@@ -47,7 +56,8 @@ const TablaSolicitudes = ({solicitudes, setSolicitudes, votaciones, setVotacione
         }, [solicitudesSeguimiento, solicitudesAdminAcademicas, solicitudesComiteTecnico, solicitudesProcesosGraduación,
           solicitudesOtros, solicitudesFacultad, solicitudesConErogacion, solicitudesSinErogacion, solicitudesVarios, setSolicitudes  
         ])
-        
+
+  
 
         useEffect(() => {
           setVotaciones(votacion)
@@ -75,14 +85,20 @@ const TablaSolicitudes = ({solicitudes, setSolicitudes, votaciones, setVotacione
      
      //hooks de estado del modal de solicitudes
      const [modalEstado, setModalEstado] = useState(false);
+
      const toggleEstado = (solicitud) => {
 
+      buscarVoto(solicitud.id)
       setSolicitudEditarEstado(solicitud)
-       setModalEstado(!modalEstado);
+      setModalEstado(!modalEstado);
+
       }
       const togglemodalEstado = () => setModalEstado(!modalEstado);
       
-
+      const buscarVoto = (id) => {
+        const votoEncontrado = votacion.find(voto => voto.solicitud_id === id);
+        setVotoEditar(votoEncontrado || null)
+      }
 
 
       const anadirSolicitud = (solicitud, solicitudes, setSolicitudes) => {
@@ -221,7 +237,7 @@ const TablaSolicitudes = ({solicitudes, setSolicitudes, votaciones, setVotacione
                 </Col>
             </Row>
             <ModalSolicitudes toggle={toggle} modal={modal} handleAsignacion={handleSeleccion} ></ModalSolicitudes>
-            <ModalEditarEstadoSolicitud toggleEstado={togglemodalEstado} modalEstado={modalEstado} solicitud={solicitudEditarEstado} handleVotacion={handleVotacion} ></ModalEditarEstadoSolicitud>
+            <ModalEditarEstadoSolicitud votoEditar={votoEditar} toggleEstado={togglemodalEstado} modalEstado={modalEstado} solicitud={solicitudEditarEstado} handleVotacion={handleVotacion} ></ModalEditarEstadoSolicitud>
         </Container>
     );
 }

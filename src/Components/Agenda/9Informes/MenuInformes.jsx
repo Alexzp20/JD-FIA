@@ -4,13 +4,17 @@ import Swal from 'sweetalert2';
 import { ModalAnadirInforme } from './ModalAnadirInforme';
 import { VerPdf } from '../../Pdf/VerPdf';
 
-export const MenuInformes = ({setTotalInformes}) => {
+export const MenuInformes = ({setTotalInformes, informesEditar}) => {
     const [modalNew, setModalNew] = useState(false);
     const [informes, setInformes] = useState([])
     const toggleNew = () =>{
         setModalNew(!modalNew)
     }
     
+    useEffect(() => {
+        if(informesEditar) setInformes(informesEditar)
+    }, [informesEditar]);
+
     useEffect(() => {
         setTotalInformes(informes)
     }, [informes, setTotalInformes]);
