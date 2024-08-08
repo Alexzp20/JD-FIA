@@ -20,7 +20,7 @@ export const ModalEditarEstadoActa = ({modalEstado, toggleEstado, acta, handleVo
       setVotosAbstencion(votoEditar.abstencion)
       setComentario(votoEditar.comentario)
     }else{
-      setEstado("6")
+      setEstado("1")
       setVotosFavor(0)
       setVotosContra(0)
       setVotosAbstencion(0)

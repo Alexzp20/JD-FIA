@@ -11,7 +11,7 @@ const ModalSolicitudes = ({modal, toggle, handleAsignacion}) => {
     const token = cookies.get('token')
 
     useEffect(() => {
-        fetch(`${REACT_API_BASE_URL}/solicitudes/estado/2`,
+        fetch(`${REACT_API_BASE_URL}/solicitudesAsignacion`,
             {
                 headers: {
                        'Authorization': `Bearer ${token}`

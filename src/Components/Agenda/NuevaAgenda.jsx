@@ -73,8 +73,9 @@ const NuevaAgenda = () => {
 
         const generales = {...data}
         let url = '';
-        id ===  null ? url = `${REACT_API_BASE_URL}/agenda` : url = `${REACT_API_BASE_URL}/agenda/${id}`;
-
+        if(!id)
+        { url = `${REACT_API_BASE_URL}/agenda`;}else {url = `${REACT_API_BASE_URL}/agenda/${id}`}
+        console.log(id,url)
         let agenda = {
             "generales": generales,
             "asistencias": asistencias,
@@ -87,7 +88,7 @@ const NuevaAgenda = () => {
           console.log(agenda)
         try {
             const response = await fetch(url, {
-              method: id === null ? 'POST': 'PUT',
+              method: !id ? 'POST': 'PUT',
               headers: {
                 'Content-Type': 'application/json',
                  'Authorization': `Bearer ${token}`
@@ -97,7 +98,7 @@ const NuevaAgenda = () => {
       
             if (response.ok) {
                 Swal.fire({
-                    title: `Agenda ${id === null ? 'nueva': 'editada'}`,
+                    title: `Agenda ${!id ? 'nueva': 'editada'}`,
                     text: "La Agenda se ha enviado con exito",
                     icon: "success"
                 });

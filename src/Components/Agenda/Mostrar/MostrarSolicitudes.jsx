@@ -92,8 +92,7 @@ const anadirSolicitud = (solicitud, solicitudes, setSolicitudes) => {
                                 <th>Codigo</th>
                                 <th>Descripción</th>
                                 <th>Documento</th>
-                                <th>Categoria</th>
-                                <th>Subcategoria</th>
+                                <th>Estado</th>
                             </tr>   
                         </thead>
                         <thead>

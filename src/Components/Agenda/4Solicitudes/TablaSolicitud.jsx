@@ -14,7 +14,7 @@ const TablaSolicitud = ({titulo ="", solicitudes, setSolicitudes, toggleEstado, 
             )}
             <tbody className='table-light text-center'>
             {solicitudes.map((solicitud)=>
-                                <tr key={solicitud.id} className={`table-${solicitud.estado === 'ACEPTADO' ? 'warning':solicitud.estado === 'APROBADO' ? 'success' : 'danger'}`}>
+                                <tr key={solicitud.id} className={`table-${solicitud.estado === 'DENEGADO' ? 'danger':solicitud.estado === 'APROBADO' ? 'success' : 'warning'}`}>
                                 <th scope='row'>{solicitud.id}</th>
                                 <td >{solicitud.descripcion}</td>
                                 <td ><VerPdf id={solicitud.id} tipo="solicitud"/></td>

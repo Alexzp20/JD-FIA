@@ -17,14 +17,13 @@ const TablaSolicitud = ({titulo ="", solicitudes}) => {
             )}
             <tbody className='table-light text-center'>
             { solicitudes && solicitudes.map((solicitud)=>
-                                <tr key={solicitud.id}>
+                                <tr key={solicitud.id} className={`table-${solicitud.estado === 'DENEGADO' ? 'danger':solicitud.estado === 'APROBADO' ? 'success' : 'warning'}`}>
                                 <th scope='row'>{solicitud.id}</th>
                                 <td >{solicitud.codigo}</td>
                                 <td >{solicitud.descripcion}</td>
                                 <td >{user.roles[0].id === 1 || user.roles[0].id === 2 ?
                                         <VerPdf id={solicitud.id} tipo="solicitud"/>:'No documento'}</td>
-                                <td >{solicitud.categoria}</td>
-                                <td >{solicitud.subcategoria ? solicitud.subcategoria : '-'}</td>
+                                <td >{solicitud.estado}</td>
                             </tr>
                             )}
             </tbody>
