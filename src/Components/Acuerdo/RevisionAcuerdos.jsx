@@ -112,7 +112,7 @@ export const RevisionAcuerdos = () => {
                     </thead>
                     <tbody className='table-light'> 
                         {solicitudes && solicitudes.map((solicitud)=>
-                    <tr key={solicitud.id}>
+                    <tr key={solicitud.id} className={`table-${solicitud.estado_id === 4 ? 'success': 'danger' }`}>
                         <th>{solicitud.id}</th>
                         <td>{solicitud.created_at.split("T")[0]+" "+ solicitud.created_at.split("T")[1].split(".")[0]}</td>
                         <td>{solicitud.codigo}</td>

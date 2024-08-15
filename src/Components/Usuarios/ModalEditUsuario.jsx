@@ -4,33 +4,29 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Container, Form, Ro
 import {useForm, Controller} from 'react-hook-form'; 
 import Cookies from 'universal-cookie';
 import { REACT_API_BASE_URL } from '../../Api';
+import Swal from 'sweetalert2';
 
 const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
 
     const {handleSubmit, control,watch,setValue} = useForm();
-    const [roles, setRoles] = useState([]);
     const puesto = parseInt(watch('puestoUsuario', ''), 10);
     const [puestos, setPuestos] = useState([]);
     const [idEdit,setIdEdit] = useState('');
     const cookies = new Cookies();
     const token = cookies.get('token')
 
-
     const deshabilitar = () =>{
-        if(puesto === 1 || puesto === 3) return true
+        if( puesto > 4 && puesto < 9) return true
         else return false
     }
-
     
     useEffect(() => {
         setValue('puestoUsuario',usuario.puesto_id)
-        setValue('rolUsuario',usuario.rol_id)
         setValue('nombreUsuario',usuario.username)
         setValue('nombresUsuario',usuario.name)
         setValue('apellidoUsuario',usuario.apellido)
         setValue('correoUsuario',usuario.email)
-        setValue('fechaNacimiento',usuario.fecha_nacimiento)
-        setValue('contraUsuario',usuario.password)
+        setValue('nacUsuario',usuario.fecha_nacimiento)
         setIdEdit(usuario.id)
     }, [setValue,usuario])
     
@@ -38,18 +34,6 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
     
     useEffect(() => {
 
-
-        fetch(`${REACT_API_BASE_URL}/rols` , {
-            headers: {
-                'Authorization': `Bearer ${token}`
-                } 
-        })
-        //pedirUsuarios()
-        .then((data) => data.json())
-        .then((res)=>{
-            setRoles(res);
-        })
-        
         fetch(`${REACT_API_BASE_URL}/puestos`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -67,33 +51,38 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
         var newUser = { 
         }
         
-        if(data.puestoUsuario === '2')
-        {
-            newUser = {
-                "username": data.nombreUsuario,
-                "name": data.nombresUsuario,
-                "apellido": data.apellidoUsuario,
-                "email": data.correoUsuario,
-                "password": data.contraUsuario,
-                "fecha_nacimiento": "2000-12-12",
-                "puesto_id": parseInt(data.puestoUsuario),
-                "role_id": parseInt(data.rolUsuario)
-            }
+        if(data.puestoUsuario === '5' || data.puestoUsuario === '6' || data.puestoUsuario === '7' || data.puestoUsuario === '8')
+            {
+                newUser = {
+                    "username": data.nombreUsuario,
+                    "name": data.nombresUsuario,
+                    "apellido": null,
+                    "email": data.correoUsuario,
+                    "password": data.contraUsuario,
+                    "password_confirmation": data.contrarepUsuario,
+                    "fecha_nacimiento": null,
+                    "puesto_id": parseInt(data.puestoUsuario),
+                    }  
         }
         else{
-            newUser = {
-                "username": data.nombreUsuario,
-                "name": data.nombresUsuario,
-                "apellido": null,
-                "email": data.correoUsuario,
-                "password": data.contraUsuario,
-                "fecha_nacimiento": null,
-                "puesto_id": parseInt(data.puestoUsuario),
-                "role_id": parseInt(data.rolUsuario)
-                 }  
+                newUser = {
+                    "username": data.nombreUsuario,
+                    "name": data.nombresUsuario,
+                    "apellido": data.apellidoUsuario,
+                    "email": data.correoUsuario,
+                    "password": data.contraUsuario,
+                    "password_confirmation": data.contrarepUsuario,
+                    "fecha_nacimiento": data.nacUsuario,
+                    "puesto_id": parseInt(data.puestoUsuario),
+                }
         }
-        
-        fetch(`${REACT_API_BASE_URL}/user/${idEdit}`, {
+        if(newUser.password === '' && newUser.password_confirmation === ''){
+        newUser.password = null
+        newUser.password_confirmation = null
+        }
+
+        console.log(newUser)
+        fetch(`${REACT_API_BASE_URL}/users/${idEdit}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,8 +91,20 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
             body: JSON.stringify(newUser)
         })
         .then(response => response.json())
-        .then(data => console.log('Datos enviados:', data))
-        .catch(error => console.error('Error al enviar datos:', error));
+        .then(data => {
+            Swal.fire({
+                title: "Usuario creado",
+                text: "El usuario se añadio con exito",
+                icon: "success"
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                title: "Error",
+                text: "Error al añadir el usuario",
+                icon: "error"
+            });
+        });
 
         }
 
@@ -160,7 +161,6 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
                                             id="nombresUsuario"
                                             placeholder="Ingrese un nombre"
                                             type="text"
-                                            disabled={deshabilitar()}
                                             />
                                             }
                                         />
@@ -199,20 +199,6 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
                             </Col>
 
                             <Col xs="6">
-                            <FormGroup >
-                                    <Label for="rolUsuario">Rol</Label>
-                                    <Controller
-                                            name="rolUsuario"
-                                            control={control}
-                                            defaultValue=""
-                                            render={({ field }) => (
-                                    <Input {...field} id="rolUsuario" type="select" options={roles.ROL}>
-                                    {roles.map((rol)=>{
-                                      return  <option value={rol.id} key={rol.id}>{rol.name}</option>
-                                    })}
-                                    </Input>)}
-                                        />                          
-                                </FormGroup>
                                 <FormGroup >
                                     <Label for="correoUsuario">Correo electronico</Label>
                                     <Controller

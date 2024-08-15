@@ -47,8 +47,7 @@ function App() {
           <Route path='/estadistico' element={<MenuEstadistico/>}/>
           <Route path='/estadistico/fechas' element={<EstRanFecha/>}/>
           <Route path='/estadistico/areas' element={<EstAreas/>}/>
-          <Route path='/ajustes' element={<MenuAjustes/>}/>
-          <Route path='/ajustes/usuarios' element={<MenuUsuarios/>}/>
+          <Route path='/usuarios' element={<MenuUsuarios/>}/>
           <Route path='/junta/miembros' element={<Miembros/>}/>
           <Route path='/agenda' element={<MenuAgenda/>}/>
           <Route path='/agenda/revision' element={<RevisionAgendas/>}/>

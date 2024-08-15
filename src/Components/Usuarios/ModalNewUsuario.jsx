@@ -10,28 +10,17 @@ const ModalNewUsuario = ({modalNew, toggleNew, consumo}) => {
 
     const {handleSubmit, control,watch,reset} = useForm();
 
-    const [roles, setRoles] = useState([]);
     const [puestos, setPuestos] = useState([]);
-    const rol = parseInt(watch('rolUsuario', ''), 10);
+    const puesto = parseInt(watch('puestoUsuario', ''), 10);
     const cookies = new Cookies();
     const token = cookies.get('token')
     
     const deshabilitar = () =>{
-        if(rol === 3  || rol === 4 ) return true
+        if(puesto > 4 && puesto < 9 ) return true
         else return false
     }
     
     useEffect(() => {
-        fetch(`${REACT_API_BASE_URL}/rols`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-                } 
-        })
-        .then((data) => data.json())
-        .then((res)=>{
-            setRoles(res);
-        })
-        
         fetch(`${REACT_API_BASE_URL}/puestos`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -47,33 +36,33 @@ const ModalNewUsuario = ({modalNew, toggleNew, consumo}) => {
     const  onSubmit = async (data) =>{
         var newUser = { 
         }
-        
-        if(data.rolUsuario === '1' || data.rolUsuario === '2' )
-        {
-            newUser = {
-                "username": data.puestoEspUsuario,
-                "name": data.nombresUsuario,
-                "apellido": data.apellidoUsuario,
-                "email": data.correoUsuario,
-                "password": data.contraUsuario,
-                "password_confirmation": data.contrarepUsuario,
-                "fecha_nacimiento": data.nacUsuario,
-                "puesto_id": parseInt(data.puestoUsuario),
-                "role_id": parseInt(data.rolUsuario)
-            }
+
+        if(data.puestoUsuario === '5' || data.puestoUsuario === '6' || data.puestoUsuario === '7' || data.puestoUsuario === '8')
+            {
+                newUser = {
+                    "username": data.nombreUsuario,
+                    "name": data.nombresUsuario,
+                    "apellido": null,
+                    "password_confirmation": data.contrarepUsuario,
+                    "email": data.correoUsuario,
+                    "password": data.contraUsuario,
+                    "fecha_nacimiento": null,
+                    "puesto_id": parseInt(data.puestoUsuario),
+                    }  
         }
         else{
-            newUser = {
-                "username": "escuela/unidad",
-                "name": data.nombresUsuario,
-                "apellido": null,
-                "email": data.correoUsuario,
-                "password": data.contraUsuario,
-                "password_confirmation": data.contrarepUsuario,
-                "puesto_id": null,
-                "role_id": parseInt(data.rolUsuario)
-                 }  
+                newUser = {
+                    "username": data.nombreUsuario,
+                    "name": data.nombresUsuario,
+                    "apellido": data.apellidoUsuario,
+                    "email": data.correoUsuario,
+                    "password": data.contraUsuario,
+                    "password_confirmation": data.contrarepUsuario,
+                    "fecha_nacimiento": data.nacUsuario,
+                    "puesto_id": parseInt(data.puestoUsuario),
+                }
         }
+        console.log(newUser)
         try {
             const response = await fetch(`${REACT_API_BASE_URL}/user`, {
                 headers: {
@@ -126,7 +115,7 @@ const ModalNewUsuario = ({modalNew, toggleNew, consumo}) => {
                                             control={control}
                                             defaultValue=""
                                             render={({ field }) => (
-                                                <Input  {...field} id="puestoUsuario" type="select"  disabled={deshabilitar()}>
+                                                <Input  {...field} id="puestoUsuario" type="select" >
                                                 <option value="0">Seleccione una    </option>
                                                 {puestos.map((puesto)=>{
                                                   return  <option value={puesto.id} key={puesto.id}>{puesto.name}</option>
@@ -137,18 +126,17 @@ const ModalNewUsuario = ({modalNew, toggleNew, consumo}) => {
                                     
                                 </FormGroup>
                                 <FormGroup >
-                                    <Label for="puestoEspUsuario">Puesto (Especifico)</Label>
+                                    <Label for="nombreUsuario">Nombre de usuario</Label>
                                     <Controller
-                                            name="puestoEspUsuario"
+                                            name="nombreUsuario"
                                             control={control}
                                             defaultValue=""
                                             render={({ field }) => 
                                             <Input
                                             {...field}
-                                            id="puestoEspUsuario"
+                                            id="nombreUsuario"
                                             placeholder="Ingrese un nombre de usuario"
                                             type="text"
-                                            disabled={deshabilitar()}
                                             />}
                                         />
                                     
@@ -190,20 +178,6 @@ const ModalNewUsuario = ({modalNew, toggleNew, consumo}) => {
                             </Col>
 
                             <Col xs="6">
-                            <FormGroup >
-                                    <Label for="rolUsuario">Rol</Label>
-                                    <Controller
-                                            name="rolUsuario"
-                                            control={control}
-                                            defaultValue=""
-                                            render={({ field }) => (
-                                    <Input {...field} id="rolUsuario" type="select">
-                                    {roles.map((rol)=>{
-                                      return  <option value={rol.id} key={rol.id}>{rol.name}</option>
-                                    })}
-                                    </Input>)}
-                                        />                          
-                                </FormGroup>
                                 <FormGroup >
                                     <Label for="correoUsuario">Correo electronico</Label>
                                     <Controller

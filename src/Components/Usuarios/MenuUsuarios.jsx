@@ -32,6 +32,7 @@ const MenuUsuarios = () => {
         .then((data) => data.json())
         .then((res)=>{
            setUsuarios(res);
+           console.log(res)
         })
     }
 
@@ -102,7 +103,7 @@ const MenuUsuarios = () => {
                                         <th>#</th>
                                         <th>Nombre de usuario</th>
                                         <th>Correo Electronido</th>
-                                        <th>Fecha nacimiento</th>
+                                        <th>Puesto</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
