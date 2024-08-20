@@ -78,6 +78,9 @@ const NavBar = () => {
                             <NavbarText><Link className='text-white' style={{ textDecoration: 'none'}} to="/junta/miembros" >Miembros JD</Link></NavbarText>                              
                         </NavItem>
                         <NavItem>
+                            <NavbarText><Link className='text-white' style={{ textDecoration: 'none'}} to="/perfil" >Perfil</Link></NavbarText>                              
+                        </NavItem>
+                        <NavItem>
                             <NavbarText><Link className='text-white' style={{ textDecoration: 'none' }} to="/" >notificaciones</Link></NavbarText>                              
                         </NavItem>
                         <NavItem> 

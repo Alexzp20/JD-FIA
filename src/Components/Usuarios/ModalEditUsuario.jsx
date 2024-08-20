@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import { REACT_API_BASE_URL } from '../../Api';
 import Swal from 'sweetalert2';
 
-const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
+const ModalEditUsuario = ({modalEdit, toggleEdit,usuario, url, consumo}) => {
 
     const {handleSubmit, control,watch,setValue} = useForm();
     const puesto = parseInt(watch('puestoUsuario', ''), 10);
@@ -21,13 +21,17 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
     }
     
     useEffect(() => {
-        setValue('puestoUsuario',usuario.puesto_id)
-        setValue('nombreUsuario',usuario.username)
-        setValue('nombresUsuario',usuario.name)
-        setValue('apellidoUsuario',usuario.apellido)
-        setValue('correoUsuario',usuario.email)
-        setValue('nacUsuario',usuario.fecha_nacimiento)
-        setIdEdit(usuario.id)
+        console.log(url,usuario)
+        if(usuario){
+
+            setValue('puestoUsuario',usuario.puesto_id)
+            setValue('nombreUsuario',usuario.username)
+            setValue('nombresUsuario',usuario.name)
+            setValue('apellidoUsuario',usuario.apellido)
+            setValue('correoUsuario',usuario.email)
+            setValue('nacUsuario',usuario.fecha_nacimiento)
+            setIdEdit(usuario.id)
+        }
     }, [setValue,usuario])
     
 
@@ -82,7 +86,7 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
         }
 
         console.log(newUser)
-        fetch(`${REACT_API_BASE_URL}/users/${idEdit}`, {
+        fetch(`${REACT_API_BASE_URL}${url}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -93,15 +97,16 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
         .then(response => response.json())
         .then(data => {
             Swal.fire({
-                title: "Usuario creado",
-                text: "El usuario se añadio con exito",
+                title: "Datos modificados",
+                text: "El usuario se edito con exito",
                 icon: "success"
             });
+            consumo()
         })
         .catch(error => {
             Swal.fire({
                 title: "Error",
-                text: "Error al añadir el usuario",
+                text: "Error al Editar el usuario",
                 icon: "error"
             });
         });
@@ -123,7 +128,7 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario}) => {
                                             control={control}
                                             defaultValue=""
                                             render={({ field }) => (
-                                                <Input  {...field} id="puestoUsuario" type="select">
+                                                <Input  {...field} id="puestoUsuario" type="select" disabled={url=== '/editarPerfil' ? true : false}>
                                                 <option value="0">Seleccione una    </option>
                                                 {puestos.map((puesto)=>{
                                                   return  <option value={puesto.id} key={puesto.id}>{puesto.name}</option>

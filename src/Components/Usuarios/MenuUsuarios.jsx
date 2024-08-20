@@ -19,6 +19,7 @@ const MenuUsuarios = () => {
     const toggleEdit = () => setModalEdit(!modalEdit);
     const [usuarios, setUsuarios] = useState([]);
     const [usuarioEdit, setUsuarioEdit] = useState({})
+    const [idUsuarioEdit, SetIdUsuarioEdit] = useState('')
     const cookies = new Cookies();
     const token = cookies.get('token')
 
@@ -36,38 +37,6 @@ const MenuUsuarios = () => {
         })
     }
 
-    const deleteUser = (id) =>{
-
-        Swal.fire({
-            title: "Desea eliminar este usuario",
-            showCancelButton: true,
-            confirmButtonText: "Eliminar",
-          }).then((result) => {
-            if (result.isConfirmed) {
-                    fetch(`${REACT_API_BASE_URL}/user/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                            } 
-                        })
-                    .then(res => res.json())
-                    .then(data => {
-                        Swal.fire({
-                            title: "Registro eliminado",
-                            text: "El usuario se ha eliminado con exito",
-                            icon: "success"
-                        });
-                        consumo();
-
-                    })
-                    .catch(err => {
-                        console.error('Error al eliminar el registro:', err);
-                    });
-            } else if (result.isDenied) {
-              Swal.fire("No se han realizado Cambios", "", "info");
-            }
-          });
-    }
 
     useEffect(() => {
         consumo()
@@ -109,14 +78,14 @@ const MenuUsuarios = () => {
                                 </thead>
                                 <tbody className='table-light'>
                                     {usuarios.map((usuario)=>{
-                                    return <FilaUsuario key={usuario.id} usuario={usuario} toggleEdit = {toggleEdit} setUsuarioEdit = {setUsuarioEdit} deleteUser={deleteUser}/>
+                                    return <FilaUsuario key={usuario.id} usuario={usuario} toggleEdit = {toggleEdit}  setIdUsuarioEdit={SetIdUsuarioEdit} setUsuarioEdit = {setUsuarioEdit} consumo={consumo}/>
                                     })}
                                 </tbody>
                             </Table>
                         </Col>
                     </Row>
                         <ModalNewUsuario toggleNew={toggleNew} modalNew={modalNew} consumo={consumo}/>
-                        <ModalEditUsuario toggleEdit={toggleEdit} modalEdit={modalEdit}  usuario = {usuarioEdit}/>
+                        <ModalEditUsuario toggleEdit={toggleEdit} modalEdit={modalEdit}  usuario = {usuarioEdit} url={`/users/${idUsuarioEdit}`} consumo={consumo}/>
                     </Container>
         </React.Fragment>
 );
