@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap';
 import {useForm, Controller} from 'react-hook-form'; 
 import NavBar from '../Navbar/NavBar';
@@ -17,6 +17,7 @@ const BuzonSolicitudes = () => {
     const cookies = new Cookies();
     const token = cookies.get('token')
     const navigate = useNavigate()
+    const fileInputRef = useRef(null);
 
 
     useEffect(() => {
@@ -84,6 +85,11 @@ const BuzonSolicitudes = () => {
                     icon: "success"
                 });
                reset();
+               setDocumento(null)
+               setValue("archivoSolicitud", "")
+               if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
             } else {
                 const errorData = await response.json();
                 console.log(errorData)
@@ -195,6 +201,7 @@ const BuzonSolicitudes = () => {
                                                     id="archivoSolicitud"
                                                     bsSize="sm"
                                                     accept='.pdf'
+                                                    innerRef={fileInputRef}
                                                     onChange={(e) => {
                                                             setDocumento(e.target.files[0]);
                                                             field.onChange(e.target.files);

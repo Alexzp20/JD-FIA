@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap';
 import {useForm, Controller} from 'react-hook-form'; 
 import Swal from 'sweetalert2';
@@ -9,12 +9,13 @@ import { REACT_API_BASE_URL } from '../../Api';
 
 export const NuevoInforme = () => {
 
-    const {handleSubmit, control, reset, formState: { errors }} = useForm();
+    const {handleSubmit, control, reset, setValue,formState: { errors }} = useForm();
     const [documento, setDocumento ] = useState(null);
     const [remitentes, setRemitentes ] = useState([]);
     const navigate = useNavigate()
     const cookies = new Cookies();
-    const token = cookies.get('token')
+    const token = cookies.get('token') 
+    const fileInputRef = useRef(null);
 
 
     useEffect(() => {
@@ -56,6 +57,11 @@ export const NuevoInforme = () => {
                     icon: "success"
                 });
                reset();
+               setDocumento(null)
+               setValue("archivoSolicitud", "")
+               if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
             } else {
                 const errorData = await response.json();
                 console.log(errorData)
@@ -145,6 +151,7 @@ export const NuevoInforme = () => {
                                             id="archivoInforme"
                                             bsSize="sm"
                                             accept='.pdf'
+                                            innerRef={fileInputRef}
                                             onChange={(e) => {
                                                     setDocumento(e.target.files[0]);
                                                     field.onChange(e.target.files);

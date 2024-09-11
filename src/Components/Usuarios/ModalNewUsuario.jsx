@@ -46,7 +46,6 @@ const ModalNewUsuario = ({modalNew, toggleNew, consumo}) => {
                     "password_confirmation": data.contrarepUsuario,
                     "email": data.correoUsuario,
                     "password": data.contraUsuario,
-                    "fecha_nacimiento": null,
                     "puesto_id": parseInt(data.puestoUsuario),
                     }  
         }
@@ -58,7 +57,6 @@ const ModalNewUsuario = ({modalNew, toggleNew, consumo}) => {
                     "email": data.correoUsuario,
                     "password": data.contraUsuario,
                     "password_confirmation": data.contrarepUsuario,
-                    "fecha_nacimiento": data.nacUsuario,
                     "puesto_id": parseInt(data.puestoUsuario),
                 }
         }
@@ -226,24 +224,7 @@ const ModalNewUsuario = ({modalNew, toggleNew, consumo}) => {
                                             />
                                             }
                                         />
-                                </FormGroup>
-                                <FormGroup >
-                                    <Label for="nacUsuario">Fecha de nacimiento</Label>
-                                    <Controller
-                                            name="nacUsuario"
-                                            control={control}
-                                            defaultValue=""
-                                            render={({ field }) => 
-                                            <Input
-                                            {...field}
-                                            id="nacUsuario"
-                                            type="date"
-                                            disabled={deshabilitar()}
-                                            />
-                                            }
-                                        />
-                                </FormGroup>
-                               
+                                </FormGroup>       
                             </Col>
                         </Row>
                         <br />

@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import NavBar from '../Navbar/NavBar';
 import Cookies from 'universal-cookie';
 import { REACT_API_BASE_URL } from '../../Api';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const NuevaAgenda = () => {
@@ -32,6 +32,7 @@ const NuevaAgenda = () => {
     const [informesEditar , setInformesEditar] = useState ([]);
     const cookies = new Cookies();
     const token = cookies.get('token')
+    const navigate = useNavigate()
     
     useEffect(() => {
             
@@ -102,7 +103,7 @@ const NuevaAgenda = () => {
                     text: "La Agenda se ha enviado con exito",
                     icon: "success"
                 });
-            
+                navigate("/agenda")
             } else {
                 const errorData = await response.json();
                 Swal.fire({

@@ -29,7 +29,6 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario, url, consumo}) => {
             setValue('nombresUsuario',usuario.name)
             setValue('apellidoUsuario',usuario.apellido)
             setValue('correoUsuario',usuario.email)
-            setValue('nacUsuario',usuario.fecha_nacimiento)
             setIdEdit(usuario.id)
         }
     }, [setValue,usuario])
@@ -64,7 +63,6 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario, url, consumo}) => {
                     "email": data.correoUsuario,
                     "password": data.contraUsuario,
                     "password_confirmation": data.contrarepUsuario,
-                    "fecha_nacimiento": null,
                     "puesto_id": parseInt(data.puestoUsuario),
                     }  
         }
@@ -76,7 +74,6 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario, url, consumo}) => {
                     "email": data.correoUsuario,
                     "password": data.contraUsuario,
                     "password_confirmation": data.contrarepUsuario,
-                    "fecha_nacimiento": data.nacUsuario,
                     "puesto_id": parseInt(data.puestoUsuario),
                 }
         }
@@ -253,23 +250,6 @@ const ModalEditUsuario = ({modalEdit, toggleEdit,usuario, url, consumo}) => {
                                             }
                                         />
                                 </FormGroup>
-                                <FormGroup >
-                                    <Label for="nacUsuario">Fecha de nacimiento</Label>
-                                    <Controller
-                                            name="nacUsuario"
-                                            control={control}
-                                            defaultValue=""
-                                            render={({ field }) => 
-                                            <Input
-                                            {...field}
-                                            id="nacUsuario"
-                                            type="date"
-                                            disabled={deshabilitar()}
-                                            />
-                                            }
-                                        />
-                                </FormGroup>
-                               
                             </Col>
                         </Row>
                         <br />

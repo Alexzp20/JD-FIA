@@ -80,9 +80,6 @@ const NavBar = () => {
                         <NavItem>
                             <NavbarText><Link className='text-white' style={{ textDecoration: 'none'}} to="/perfil" >Perfil</Link></NavbarText>                              
                         </NavItem>
-                        <NavItem>
-                            <NavbarText><Link className='text-white' style={{ textDecoration: 'none' }} to="/" >notificaciones</Link></NavbarText>                              
-                        </NavItem>
                         <NavItem> 
                             <Dropdown isOpen={dropdownOpen} toggle={toggle} direction="down">
                                 <DropdownToggle color='custom-light' caret>{user.name+" "+ (user.apellido !== null ? user.apellido : '')}</DropdownToggle>

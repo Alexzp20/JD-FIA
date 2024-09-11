@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap';
-import {useForm, Controller} from 'react-hook-form'; 
+import {useForm, Controller, set} from 'react-hook-form'; 
 import Swal from 'sweetalert2';
 import NavBar from '../Navbar/NavBar';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ export const NuevaActa = () => {
     const [documento, setDocumento ] = useState(null);
     const cookies = new Cookies();
     const token = cookies.get('token')
+    const fileInputRef = useRef(null);
 
     const onSubmit = async (data) =>{
 
@@ -40,6 +41,11 @@ export const NuevaActa = () => {
                     icon: "success"
                 });
                reset();
+               setDocumento(null)
+               setValue("archivoSolicitud", "")
+               if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
             } else {
                 const errorData = await response.json();
                 console.log(errorData)
@@ -131,6 +137,7 @@ export const NuevaActa = () => {
                                             id="archivoActa"
                                             bsSize="sm"
                                             accept='.pdf'
+                                            innerRef={fileInputRef}
                                             onChange={(e) => {
                                                     setDocumento(e.target.files[0]);
                                                     field.onChange(e.target.files);
