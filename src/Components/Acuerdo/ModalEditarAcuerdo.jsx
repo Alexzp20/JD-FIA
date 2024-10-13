@@ -27,7 +27,7 @@ export const ModalEditarAcuerdo = ({toggleEdit, modalEdit,solicitud,getAcuerdos}
         const form = new FormData();
         form.append('solicitud',solicitud.id);
         form.append('codigoAcuerdo', data.codAcuerdo);
-        documento && form.append('documentoAcuerdo', documento);
+        if(documento !== null)form.append('documentoAcuerdo', documento);
         
 
 
@@ -51,6 +51,7 @@ export const ModalEditarAcuerdo = ({toggleEdit, modalEdit,solicitud,getAcuerdos}
                 reset()
                 getAcuerdos()
                 toggleEdit()
+                setDocumento(null)
             } else {
                 const errorData = await response.json();
                 console.log(errorData)

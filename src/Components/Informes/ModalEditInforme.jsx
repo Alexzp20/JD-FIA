@@ -39,7 +39,7 @@ export const ModalEditInforme = ({informe, toggleEdit, modalEdit,getInformes}) =
         
         const form = new FormData();
         form.append('codigoInforme', data.codInforme);
-        if(!documento) form.append('documentoInforme', documento);
+        if(documento !== null)form.append('documentoInforme', documento);
         form.append('remitente', data.remitenteInforme);
 
         try {
@@ -60,6 +60,7 @@ export const ModalEditInforme = ({informe, toggleEdit, modalEdit,getInformes}) =
                reset();
                toggleEdit()
                getInformes()
+               setDocumento(null)
             } else {
                 const errorData = await response.json();
                     Swal.fire({

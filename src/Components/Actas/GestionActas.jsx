@@ -31,7 +31,7 @@ export const GestionActas = () => {
       method: 'GET'
         })
         .then(response => response.json())
-        .then(data =>{ setActas(data)})
+        .then(data =>{ console.log(data); setActas(data)})
         .catch(error => console.log(error));
     }
 
@@ -126,7 +126,7 @@ export const GestionActas = () => {
                             </Table>
                         </Col>      
                     </Row>
-                    <ModalEditActa   toggleEdit={toggleEdit} modalEdit={modalEdit} acta={actaEdit}/>
+                    <ModalEditActa   toggleEdit={toggleEdit} modalEdit={modalEdit} acta={actaEdit} getActas={getActas}/>
     </Container>
     </React.Fragment>
   )

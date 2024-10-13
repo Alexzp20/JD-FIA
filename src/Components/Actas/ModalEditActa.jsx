@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import { REACT_API_BASE_URL } from '../../Api';
 
 
-export const ModalEditActa = ({acta, toggleEdit, modalEdit}) => {
+export const ModalEditActa = ({acta, toggleEdit, modalEdit, getActas}) => {
 
 
     const {handleSubmit, control, watch, reset, formState: { errors },setValue} = useForm();
@@ -23,7 +23,7 @@ export const ModalEditActa = ({acta, toggleEdit, modalEdit}) => {
 
         const form = new FormData();
         form.append('codigoActa', data.codActa);
-        form.append('documentoActa', documento);
+        if(documento !== null)form.append('documentoActa', documento);
 
         try {
             const response = await fetch(`${REACT_API_BASE_URL}/acta/${acta.id}`, {
@@ -43,6 +43,8 @@ export const ModalEditActa = ({acta, toggleEdit, modalEdit}) => {
                 });
                reset();
                toggleEdit()
+               setDocumento(null)
+               getActas()
             } else {
                 const errorData = await response.json();
                 console.log(errorData)
