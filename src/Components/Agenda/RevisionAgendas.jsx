@@ -29,13 +29,13 @@ export const RevisionAgendas = () => {
    }
    
 
-   const publicarAgenda =  (id) => {
+   const publicarOcultarAgenda =  (id, bandera) => {
 
     Swal.fire({
-        title: 'Publicar agenda',
-        text: 'Desea publicar la siguiente agenda:',
+        title: (bandera === 1 ? 'Publicar ': 'Ocultar' )+' agenda',
+        text: (bandera === 1 ? 'Desea Publicar ': 'Desea Ocultar') +' la siguiente agenda:',
         showCancelButton: true,
-        confirmButtonText: 'Publicar',
+        confirmButtonText: bandera === 1 ? 'Publicar': 'Ocultar',
         cancelButtonText: "Cancelar",
     }).then((result) => {
         if (result.isConfirmed) {
@@ -48,7 +48,7 @@ export const RevisionAgendas = () => {
               })
                 .then(response => {
                   if (!response.ok) {
-                      Swal.fire("Error en LA publicación", response.status, "error");
+                      Swal.fire("Error en la publicación", response.status, "error");
                   }
                   else{
                       response.text()
@@ -56,7 +56,7 @@ export const RevisionAgendas = () => {
                 })
                 .then(data => {
                     Swal.fire({
-                        title: 'Agenda publicada',
+                        title: 'Agenda ' + (bandera !== 1 ? 'Ocultada': 'Publicada'),
                         text: data,
                         icon: "success"
                     });
@@ -73,7 +73,49 @@ export const RevisionAgendas = () => {
       });
 
 }
-    
+ 
+const eliminarAgenda = (id) =>{
+
+    Swal.fire({
+        title: "Desea eliminar esta agenda",
+        showCancelButton: true,
+        confirmButtonText: "Eliminar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+                fetch(`${REACT_API_BASE_URL}/agenda/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                        } 
+                    })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    Swal.fire({
+                        title: "Registro eliminado",
+                        text: "La agenda se ha eliminado con exito",
+                        icon: "success"
+                    });
+                    getAgendas()
+
+                })
+                .catch(err => {
+                Swal.fire({
+                        title: "Error al eliminar el registro",
+                        text: {err},
+                        icon: "error"
+                    });
+                    console.error(':', err);
+                });
+        } else if (result.isDenied) {
+          Swal.fire("No se han realizado Cambios", "", "info");
+        }
+      });
+
+}
+
+
+
     
   return (
     <React.Fragment>
@@ -115,8 +157,10 @@ export const RevisionAgendas = () => {
                             {' '}
                           <Link to={`/agenda/nueva/${agenda.id}`}> <Button color='custom-warning'className='text-light'>Editar agenda</Button></Link>
                             {' '}
-                            {agenda.publicada === 1 ? <Button color='custom-danger' className='text-light' onClick={()=>{}}>Ocultar</Button>:
-                            <Button color='custom-info' className='text-light' onClick={()=>{publicarAgenda(agenda.id)}}>Publicar</Button> }
+                            {agenda.publicada === 1 ? <Button color='custom-danger' className='text-light' onClick={()=>{publicarOcultarAgenda(agenda.id , 0)}}>Ocultar</Button>:
+                            <Button color='custom-info' className='text-light' onClick={()=>{publicarOcultarAgenda(agenda.id , 1)}}>Publicar</Button> }
+                            {' '}
+                            <Button color='custom-dark' disabled={agenda.publicada === 1 } className='text-light' onClick={()=>{eliminarAgenda(agenda.id)}}>Eliminar</Button>
                         </td>
                         <td>
                            <Link to={`/acuerdo/revision/${agenda.id}`}> <Button color='custom-success'className='text-light'>Ver acuerdos</Button></Link>
