@@ -85,7 +85,6 @@ const NavBar = () => {
                                 <DropdownToggle color='custom-light' caret>{user.name+" "+ (user.apellido !== null ? user.apellido : '')}</DropdownToggle>
                                 <DropdownMenu dark>
                                 <DropdownItem className='text-white'header><h5>{user.name+" "+ (user.apellido !== null ? user.apellido : '')}</h5></DropdownItem>
-                                <DropdownItem><Link className='text-white' style={{ textDecoration: 'none' }} to="/inicio" >Perfil</Link></DropdownItem>
                                 <DropdownItem divider />
                                 <DropdownItem><Button color='custom-light' onClick={()=>logout()}>Cerrar sesión</Button></DropdownItem>
                                 </DropdownMenu>

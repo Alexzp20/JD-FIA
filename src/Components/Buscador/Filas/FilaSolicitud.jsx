@@ -4,7 +4,7 @@ import { VerPdf } from '../../Pdf/VerPdf';
 
 const FilaSolicitud = ({solicitud}) => {
     return (
-        <tr>
+        <tr className={`table-${solicitud.estado === "SUBIDO"? 'secondary': solicitud.estado === "RECHAZO"? 'danger': solicitud.estado === "DENEGADO"? 'danger':solicitud.estado=== "APROBADO"?'success':'warning'}`}>
             <th scope='row'>{solicitud.id}</th>
             <td>{solicitud.creado.split("T")[0]+" "+ solicitud.creado.split("T")[1].split(".")[0]}</td>
             <td>{solicitud.codigo}</td>

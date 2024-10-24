@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { pedirAcuerdos } from '../../Helpers/pedirDatos';   
+import React, { useEffect, useState } from 'react'; 
 import FilaAcuerdo from './Filas/FilaAcuerdo';
 import {  Col, Container, Input, Label, Row, Table } from 'reactstrap';
 import NavBar from '../Navbar/NavBar';
+import Cookies from 'universal-cookie';
+import { REACT_API_BASE_URL } from '../../Api';
 
 const BusquedaAcuerdo = () => {
 
     const [acuerdos, setAcuerdos] = useState([]);
     const [acuerdosBusqueda, setAcuerdosBusqueda] = useState([]);
     const [busqueda, setBusqueda] = useState("");
+    const cookies = new Cookies();
+    const token = cookies.get('token')
 
       //funcion que guarda en la busqueda el valor del input de entrada
       const handleChange = e => {
@@ -29,11 +32,17 @@ const BusquedaAcuerdo = () => {
 
     //hook para devolver los datos de las agendas
     useEffect(() => {
-        pedirAcuerdos()
-        .then((res)=>{
-            setAcuerdos(res);
-            setAcuerdosBusqueda(res);
+        fetch(`${REACT_API_BASE_URL}/acuerdos`, {
+            headers: {
+               'Authorization': `Bearer ${token}`
+      },
         })
+        .then(response => response.json())
+        .then(data =>{ setAcuerdos(data);
+            setAcuerdosBusqueda(data);
+            
+            console.log(data)})
+        .catch(error => console.log(error));
     }, []);
 
 
@@ -73,10 +82,10 @@ const BusquedaAcuerdo = () => {
                                 <thead className='table-primary '>
                                     <tr>    
                                         <th>#</th>
-                                        <th>Descripción de la solicitud</th>
-                                        <th>Descripción del acuerdo</th>
+                                        <th>Código</th>
+                                        <th>Código de la solicitud asociado</th>
+                                        <th>Descripción</th>
                                         <th>Documento de acuerdo</th>
-                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody className='table-light'>

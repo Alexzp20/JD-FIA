@@ -34,7 +34,7 @@ const BusquedaSolicitud = () => {
     //hook para devolver los datos de las agendas
     useEffect(() => {
 
-        fetch(`${REACT_API_BASE_URL}/solicitudes`, {
+        fetch(`${REACT_API_BASE_URL}/todasSolicitudes`, {
             headers: {
                'Authorization': `Bearer ${token}`
       },

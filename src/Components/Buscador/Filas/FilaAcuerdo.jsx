@@ -1,14 +1,15 @@
 import React from 'react';
 import { Button } from 'reactstrap';
+import { VerPdf } from '../../Pdf/VerPdf';
 
 const FilaAcuerdo = ({acuerdo}) => {
     return (
-        <tr>
+        <tr className='table-success'>
             <th scope='row'>{acuerdo.id_acuerdo}</th>
-            <td>{acuerdo.descripcion_solicitud}</td>
-            <td>{acuerdo.descripcion_acuerdo}</td>
-            <td>{acuerdo.documento_acuerdo}</td>
-            <td><Button className="text-white" color='custom-danger'>Eliminar</Button></td>
+            <td>{acuerdo.codigo_acuerdo}</td>
+            <td>{acuerdo.codigo_solicitud}</td>
+            <td>{acuerdo.descripcion}</td>
+            <td><VerPdf id={acuerdo.id_acuerdo} tipo="acuerdo"/></td>
         </tr>   
     );
 }
